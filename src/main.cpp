@@ -59,7 +59,9 @@ int main() {
            << "plt.close()\n";
     script.close();
     
-    system("python result/plot.py");
+    if (system("python result/plot.py") == -1) {
+        std::cout << "Warning: Could not run plot script" << std::endl;
+    }
     std::cout << "Done. Plot saved to result/plot.png" << std::endl;
     
     return 0;
