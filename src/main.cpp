@@ -24,7 +24,8 @@ int main() {
         trainRnd.getLength();
         int rndOps = trainRnd.getOpCount();
 
-        std::cout << n << "\t" << offOps << "\t" << onOps << "\t" << rndOps << "\n";
+        std::cout << n << "\t" << offOps << "\t"
+                  << onOps << "\t" << rndOps << "\n";
     }
     return 0;
 }
