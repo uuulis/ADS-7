@@ -1,3 +1,4 @@
+// src/main.cpp
 // Copyright 2022 NNTU-CS
 #include <iostream>
 #include <fstream>
@@ -7,35 +8,36 @@
 int main() {
     std::ofstream out("result/data.csv");
     out << "n,all_off,all_on,random" << std::endl;
-    
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, 1);
-    
+
     for (int n = 2; n <= 500; n += 10) {
         long long ops_off = 0, ops_on = 0, ops_rand = 0;
-        
-        for (int trial = 0; trial < 10; trial++) {
+
+        for (int trial = 0; trial < 10; ++trial) {
             Train train_off;
-            for (int i = 0; i < n; i++) train_off.addCar(false);
+            for (int i = 0; i < n; ++i) train_off.addCar(false);
             train_off.getLength();
             ops_off += train_off.getOpCount();
-            
+
             Train train_on;
-            for (int i = 0; i < n; i++) train_on.addCar(true);
+            for (int i = 0; i < n; ++i) train_on.addCar(true);
             train_on.getLength();
             ops_on += train_on.getOpCount();
-            
+
             Train train_rand;
-            for (int i = 0; i < n; i++) train_rand.addCar(dis(gen));
+            for (int i = 0; i < n; ++i) train_rand.addCar(dis(gen));
             train_rand.getLength();
             ops_rand += train_rand.getOpCount();
         }
-        
-        out << n << "," << ops_off/10 << "," << ops_on/10 << "," << ops_rand/10 << std::endl;
+
+        out << n << "," << ops_off / 10 << "," << ops_on / 10 << ","
+            << ops_rand / 10 << std::endl;
     }
     out.close();
-    
+
     std::ofstream script("result/plot.py");
     script << "import matplotlib.pyplot as plt\n"
            << "import numpy as np\n"
@@ -58,11 +60,11 @@ int main() {
            << "plt.savefig('result/plot.png',dpi=150)\n"
            << "plt.close()\n";
     script.close();
-    
+
     if (system("python result/plot.py") == -1) {
         std::cout << "Warning: Could not run plot script" << std::endl;
     }
     std::cout << "Done. Plot saved to result/plot.png" << std::endl;
-    
+
     return 0;
 }
