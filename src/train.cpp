@@ -1,3 +1,4 @@
+// src/train.cpp
 // Copyright 2021 NNTU-CS
 #include "train.h"
 
@@ -38,29 +39,30 @@ int Train::getLength() {
     if (!first) return 0;
     countOp = 0;
     Car* current = first;
+    // выключаем свет в первом вагоне
     current->light = false;
-    int step = 0;
+    int step = 1;
     while (true) {
-        for (int i = 0; i < step; i++) {
+        for (int i = 0; i < step; ++i) {
             current = current->next;
-            countOp++;
+            ++countOp;
         }
         if (!current->light) {
             current->light = true;
-            step = 0;
+            step = 1;
             current = first;
-            countOp++;
+            ++countOp;
         } else {
             break;
         }
     }
     int length = 1;
     current = current->next;
-    countOp++;
+    ++countOp;
     while (current != first) {
-        length++;
+        ++length;
         current = current->next;
-        countOp++;
+        ++countOp;
     }
     return length;
 }
