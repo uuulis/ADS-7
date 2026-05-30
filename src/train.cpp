@@ -1,7 +1,10 @@
 // Copyright 2021 NNTU-CS
 #include "train.h"
 
-Train::Train() : countOp(0), first(nullptr) {}
+Train::Train() {
+    countOp = 0;
+    first = nullptr;
+}
 
 Train::~Train() {
     if (!first) return;
@@ -14,7 +17,10 @@ Train::~Train() {
 }
 
 void Train::addCar(bool light) {
-    Car* newCar = new Car{light, nullptr, nullptr};
+    Car* newCar = new Car;
+    newCar->light = light;
+    newCar->next = nullptr;
+    newCar->prev = nullptr;
     if (!first) {
         first = newCar;
         newCar->next = newCar;
