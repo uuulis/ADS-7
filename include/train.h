@@ -1,9 +1,10 @@
+// include/train.h
 // Copyright 2022 NNTU-CS
 #ifndef INCLUDE_TRAIN_H_
 #define INCLUDE_TRAIN_H_
 
 class Train {
-private:
+ private:
     struct Car {
         bool light;
         Car *next;
@@ -11,7 +12,7 @@ private:
     };
     int countOp;
     Car *first;
-public:
+ public:
     Train();
     ~Train();
     void addCar(bool light);
@@ -19,4 +20,4 @@ public:
     int getOpCount();
 };
 
-#endif
+#endif  // INCLUDE_TRAIN_H_
