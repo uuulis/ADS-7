@@ -1,4 +1,3 @@
-
 // Copyright 2022 NNTU-CS
 #include <iostream>
 #include <cstdlib>
@@ -6,7 +5,7 @@
 #include "train.h"
 
 int main() {
-    srand(time(0));
+    unsigned int seed = time(0);
     std::cout << "n\toff\ton\trandom\n";
     for (int n = 10; n <= 500; n += 10) {
         Train trainOff;
@@ -20,7 +19,7 @@ int main() {
         int onOps = trainOn.getOpCount();
 
         Train trainRnd;
-        for (int i = 0; i < n; ++i) trainRnd.addCar(rand() % 2);
+        for (int i = 0; i < n; ++i) trainRnd.addCar(rand_r(&seed) % 2);
         trainRnd.getLength();
         int rndOps = trainRnd.getOpCount();
 
